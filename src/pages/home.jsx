@@ -6,40 +6,15 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { MdFavorite } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
-const URL = "https://api.themoviedb.org/3/movie/top_rated";
-
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
-  },
-};
+import { useGlobalContext } from "../context";
+import Loading from "../components/Loading";
 
 const home = () => {
-  const [movie, setMovie] = useState([]);
-  const [isFavourite, setIsFavourite] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  const getMovies = async () => {
-    try {
-      const response = await axios.get(URL, options);
-      setMovie(response.data.results);
-      console.log("Koca: response.data.results ", response.data.results);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getMovies();
-  }, []);
+  const { movie, loading } = useGlobalContext();
 
   if (loading) {
-    return <h1 className="text-center text-3xl font-bold">Loading...</h1>;
+    return <Loading />;
   }
-
-  const handleFavourite = (id) => {};
 
   return (
     <>
@@ -60,13 +35,10 @@ const home = () => {
                   src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                   alt=""
                 />
-                <div onClick={() => handleFavourite(movie.id)}>
-                  {" "}
-                  {isFavourite ? (
-                    <MdFavoriteBorder className="absolute top-3 right-3 text-2xl bg-[#D1D5DB] rounded-full p-1" />
-                  ) : (
-                    <MdFavorite className="absolute top-3 right-3 text-2xl bg-[#D1D5DB] rounded-full p-1" />
-                  )}
+                <div>
+                  <MdFavoriteBorder className="absolute top-3 right-3 text-2xl bg-[#D1D5DB] rounded-full p-1" />
+
+                  {/* <MdFavorite className="absolute top-3 right-3 text-2xl bg-[#D1D5DB] rounded-full p-1" /> */}
                 </div>
               </div>
               <p data-testid="movie-title">{movie.title}</p>

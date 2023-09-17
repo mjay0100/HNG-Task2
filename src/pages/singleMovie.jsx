@@ -4,6 +4,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const singleMovie = () => {
   const [singleMovie, setSingleMovie] = useState(null);
@@ -29,7 +30,7 @@ const singleMovie = () => {
   }, [id]);
 
   if (loading) {
-    return <h1 className="text-center text-3xl font-bold">Loading...</h1>;
+    return <Loading />;
   }
 
   return (
