@@ -17,9 +17,7 @@ const singleMovie = () => {
     try {
       const response = await axios.get(URL);
       console.log(response.data);
-      const { title, released } = response.data;
       setSingleMovie(response.data);
-      console.log("Koca: response.data ", response.data);
       setLoading(false);
     } catch (error) {
       console.error(error);

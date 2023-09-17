@@ -7,7 +7,7 @@ const Navbar = () => {
     <header className=" pl-8 items-start mb-5 main-img">
       <div className="flex items-center gap-4 my-5 ">
         <img src={tv} className="w-10" alt=" " />
-        <h1 className="text-xl">MovieBox</h1>
+        <h1 className="text-xl text-white">MovieBox</h1>
       </div>
       <div className="flex justify-between my-5 ">
         <input
